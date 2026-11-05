@@ -20,6 +20,7 @@ Welcome to **svvv_web** (My WebApp Hub). This document provides context, convent
 
 ```text
 svvv_web/
+├── source/                 # 📦 Raw source code / projects to be converted into web apps (git-ignored)
 ├── src/
 │   ├── config/
 │   │   └── apps.config.ts      # ⭐️ Single Source of Truth for web apps list & portal metadata
@@ -91,3 +92,12 @@ Always prefer running these standard npm commands:
 Whenever you make changes to UI or configuration:
 1. Run `npm run build` to verify TypeScript types and bundle output.
 2. Run `npm run test:browser` to confirm that the headless browser test passes and no console errors are introduced.
+
+### 6. Working with `source/` (Source Code Conversion Workflow)
+- **Purpose**: The `source/` directory (`D:\me\svvv_web\source`) is dedicated to storing raw source code, external tools, or legacy repositories (e.g. `Pokemon-Team-Builder-master`) that are intended to be modernized, adapted, or converted into web apps.
+- **Git Excluded**: This directory is ignored in `.gitignore` (`/source`) to keep the portal repository lightweight and free from upstream vendor dependencies or large raw assets.
+- **Conversion Workflow for Agents**:
+  1. Inspect the source project under `source/<project-name>` to identify its tech stack, entry point, dependencies, and build requirements.
+  2. Modernize/convert the project into a web-accessible application (e.g. static SPA, standalone micro-app, or hosted service).
+  3. Register the new web application inside [`src/config/apps.config.ts`](file:///d:/me/svvv_web/src/config/apps.config.ts) with appropriate title, description, URL, Lucide icon, category, and badge.
+  4. Run `npm run build` and `npm run test:browser` to verify the portal displays the new app tile correctly.
