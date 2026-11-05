@@ -1,12 +1,23 @@
 import type { WebAppItem } from '../types'
+import pokemonAppIcon from '../assets/pokemon_team_builder.png'
 
 /**
  * กำหนดรายชื่อ Web Apps ทั้งหมดของคุณที่นี่
  * - เพิ่ม ลบ หรือแก้ไขรายการได้ง่ายๆ ตามโครงสร้างด้านล่าง
- * - icon: รองรับชื่อ Lucide icon เช่น 'LayoutDashboard', 'Database', 'Bot', 'BarChart3', 'FileText', 'Server', 'Globe' ฯลฯ
+ * - icon: รองรับชื่อ Lucide icon เช่น 'LayoutDashboard', 'Database', 'Bot' หรือ path รูปภาพ
  * - gradient: โทนสีพื้นหลังไอคอนสไตล์ Modern App Icon
  */
 export const WEB_APPS: WebAppItem[] = [
+  {
+    id: 'pokemon-team-builder',
+    title: 'Pokemon Team Builder',
+    description: 'ระบบวิเคราะห์ธาตุ จัดทีม และแนะนำตัวปิดจุดอ่อน 18 ธาตุ (รองรับทั้ง Type และชื่อโปเกมอนจริง)',
+    url: '#/pokemon-builder',
+    icon: pokemonAppIcon,
+    category: 'Games / Tools',
+    badge: 'NEW',
+    isExternal: false,
+  },
   {
     id: 'dashboard',
     title: 'Main Dashboard',

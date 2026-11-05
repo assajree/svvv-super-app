@@ -1,16 +1,33 @@
-# 🚀 My WebApp Hub (Launchpad Portal)
+# 🚀 My WebApp Hub (Super App & Launchpad Portal)
+
+> 🌐 **Live Demo (GitHub Pages):** [https://assajree.github.io/svvv-super-app/](https://assajree.github.io/svvv-super-app/)  
+> 📦 **GitHub Repository:** [https://github.com/assajree/svvv-super-app](https://github.com/assajree/svvv-super-app)
 
 เว็บรวม Web Application ส่วนตัวและระบบงาน สไตล์ **Minimal Dock / macOS Launchpad & Google App Grid** เรียบหรู คลีน สวยงาม โหลดเร็ว ด้วย Vite + React + TypeScript + Tailwind CSS
+
+รองรับทั้ง **การเปิดลิงก์ไปยัง Web App ภายนอก** และ **การรันแอปพลิเคชันภายในตัว (Built-in Micro-apps)** โดยไม่ต้องเปลี่ยนหน้า
 
 ---
 
 ## ✨ จุดเด่นและฟีเจอร์
 
-- **🎨 Minimal App Grid Layout**: การ์ดไอคอนแอปสไตล์ Squircle ทรงมน พร้อม Gradient และ Micro-interaction เมื่อชี้เมาส์ (Hover Effect)
-- **🌓 Dark / Light Mode**: สลับโหมดมืด-สว่างได้ง่ายดาย บันทึกการตั้งค่าลง LocalStorage อัตโนมัติ
-- **🔍 Quick Search & Category Filter**: ค้นหาด่วนตามชื่อ คำอธิบาย หรือแท็กหมวดหมู่
-- **⚡ Ultra Fast & Lightweight**: ขนาด JS Bundle เพียง ~76 kB (gzipped) โหลดเปิดเว็บได้ในเสี้ยววินาที
-- **🛠️ Zero-Backend Management**: จัดการรายชื่อ Webapp ทั้งหมดผ่านไฟล์ Config เพียงไฟล์เดียว
+- **🎨 Minimal App Grid Layout**: การ์ดไอคอนแอปสไตล์ Squircle ทรงมน พร้อม Gradient เคลือบแก้ว และ Hover Animation
+- **🧩 Built-in Micro-apps Support**: รองรับการสร้างและรันแอปภายในตัวพอร์ทัลผ่าน Client-side Hash Routing (เช่น Pokemon Team Builder)
+- **🌓 Dark / Light Mode**: สลับโหมดมืด-สว่างได้ราบรื่น บันทึกค่าลง LocalStorage อัตโนมัติ (Tailwind CSS v4 Custom Variant)
+- **🔍 Quick Search & Category Filter**: ค้นหาด่วนตามชื่อ คำอธิบาย หรือเลือกดูตามหมวดหมู่
+- **⚡ Ultra Fast & Lightweight**: รวดเร็ว ขนาด Bundle เบา โหลดแสดงผลได้ทันที
+- **🤖 Headless E2E Browser Testing**: มีระบบ Playwright Automated Test ตรวจสอบ Error และถ่ายภาพหน้าจอให้อัตโนมัติ
+- **🛠️ Zero-Backend & Git-based**: บริหารจัดการรายชื่อแอปทั้งหมดผ่านไฟล์ Config หรือเขียนโค้ดเพิ่มแอปได้ง่ายดาย
+
+---
+
+## 🎮 Built-in Apps ที่ติดตั้งพร้อมใช้งาน
+
+- **🛡️ Pokemon Team Builder (`#/pokemon-builder`)**
+  - วิเคราะห์จุดแข็ง-จุดอ่อนของทีมโปเกมอนตาม Type Matchup ทั้ง 18 ธาตุ
+  - ตารางเมทริกซ์คำนวณความต้านทาน (Resistances) และการแพ้ทาง (Weaknesses) รวม
+  - ระบบค้นหาและเลือกจากรายชื่อโปเกมอนจริง หรือระบุเฉพาะ Type ผสมเองได้
+  - AI / Rule-based Recommender แนะนำโปเกมอนและธาตุที่ช่วยมาปิดจุดอ่อนของทีม
 
 ---
 
@@ -18,8 +35,11 @@
 
 ```text
 svvv_web/
+├── source/                  # 📦 โค้ดต้นฉบับ/โปรเจกต์ภายนอกสำหรับนำมา Convert (git-ignored)
 ├── public/                  # Static assets และ Favicon
 ├── src/
+│   ├── apps/                # 🧩 Built-in Micro-apps ภายในตัวพอร์ทัล
+│   │   └── pokemon-team-builder/  # แอป Pokemon Team Builder
 │   ├── config/
 │   │   └── apps.config.ts   # ⭐️ ไฟล์กำหนดรายชื่อ Webapp ทั้งหมดของคุณที่นี่
 │   ├── components/
@@ -34,31 +54,54 @@ svvv_web/
 │   │   └── index.ts             # TypeScript interface ของ WebAppItem
 │   ├── lib/
 │   │   └── utils.ts             # Tailwind class merging utility (cn)
-│   ├── App.tsx                  # หน้าหลัก (Main Component)
-│   ├── index.css                # Tailwind CSS v4 styling & theme tokens
+│   ├── App.tsx                  # หน้าหลักและ Routing สลับแอป
+│   ├── index.css                # Tailwind CSS v4 styling & dark mode setup
 │   └── main.tsx                 # Entry point ของ React
-├── index.html               # โครงสร้างหน้าเว็บหลักและฟอนต์ Inter / Prompt
+├── tests/
+│   └── launchpad.spec.ts    # สคริปต์ Playwright Headless Browser Test
+├── screenshots/             # ภาพถ่ายหน้าจอทดสอบ Light & Dark mode
+├── _start.bat               # ดับเบิลคลิกเพื่อเปิดเว็บทันที (Dev Server + Browser)
+├── _build.bat               # ดับเบิลคลิกเพื่อ Build โปรเจกต์
+├── _test-browser.bat        # ดับเบิลคลิกเพื่อรัน Headless Browser Test
+├── _push.bat                # ดับเบิลคลิกเพื่อ Push โค้ดขึ้น GitHub
+├── AGENTS.md                # คู่มือและข้อตกลงสำหรับ AI Coding Agents
 ├── package.json
-├── tsconfig.json
-└── vite.config.ts           # การตั้งค่า Vite + Tailwind Plugin
+└── vite.config.ts           # การตั้งค่า Vite + Tailwind Plugin (Relative Base Path)
 ```
 
 ---
 
 ## 📝 วิธีเพิ่ม Webapp ใหม่
 
-เปิดไฟล์ [`src/config/apps.config.ts`](file:///d:/me/svvv_web/src/config/apps.config.ts) แล้วเพิ่ม Object ใหม่เข้าไปใน Array `WEB_APPS`:
+เปิดไฟล์ [`src/config/apps.config.ts`](file:///d:/me/svvv_web/src/config/apps.config.ts) แล้วเพิ่มข้อมูลเข้าไปใน Array `WEB_APPS`:
 
+### แบบที่ 1: ลิงก์ไปยังเว็บแอปภายนอก (เปิดแท็บใหม่)
 ```typescript
 {
-  id: 'my-new-app',                    // รหัสเฉพาะของแอป
-  title: 'ชื่อเว็บแอปของคุณ',            // ชื่อที่แสดงใต้ไอคอน
-  description: 'คำอธิบายสั้นๆ',          // คำอธิบาย (แสดงตอน hover/search)
-  url: 'https://my-domain.com/app',    // URL สำหรับเปิดแอป
-  icon: 'Sparkles',                    // ชื่อไอคอน Lucide (เช่น Globe, Server, Bot ฯลฯ)
-  category: 'เครื่องมือ',               // หมวดหมู่สำหรับกรอง
-  badge: 'PROD',                       // แท็กสถานะมุมบนขวา (เช่น PROD, BETA, DEV)
-  gradient: 'from-blue-500 to-indigo-600', // โทนสีพื้นหลังไอคอน Tailwind
+  id: 'my-external-app',
+  title: 'ชื่อเว็บแอปภายนอก',
+  description: 'คำอธิบายสั้นๆ เกี่ยวกับแอป',
+  url: 'https://my-domain.com/app',
+  icon: 'Globe',                           // ชื่อ Lucide Icon (เช่น Server, Bot, BarChart3)
+  category: 'เครื่องมือ',
+  badge: 'PROD',
+  gradient: 'from-blue-500 to-indigo-600',
+  isExternal: true,                        // เปิดแท็บใหม่
+}
+```
+
+### แบบที่ 2: Built-in Micro-app ภายในเว็บ (เปิดในหน้าเดิม)
+```typescript
+{
+  id: 'my-internal-tool',
+  title: 'เครื่องมือภายใน',
+  description: 'รันภายในพอร์ทัลโดยตรง',
+  url: '#/my-tool',                        // กำหนด Hash URL
+  icon: 'Cpu',
+  category: 'Tools',
+  badge: 'BUILT-IN',
+  gradient: 'from-purple-500 to-pink-600',
+  isExternal: false,                       // แสดงผลผ่าน App.tsx ในหน้าเดิม
 }
 ```
 
@@ -90,13 +133,13 @@ npm run test:debug
 npm run build
 # หรือดับเบิลคลิกไฟล์ _build.bat
 ```
-ไฟล์ที่พร้อมใช้งานจะอยู่ในโฟลเดอร์ `dist/` สามารถนำไปอัปโหลดขึ้น **Vercel**, **Cloudflare Pages**, **Netlify**, หรือโฮสติ้งใดๆ ได้ทันที!
+ไฟล์ที่พร้อมใช้งานจะอยู่ในโฟลเดอร์ `dist/` สามารถนำไปอัปโหลดขึ้น **GitHub Pages**, **Vercel**, **Cloudflare Pages**, หรือโฮสติ้งใดๆ ได้ทันที!
 
 ---
 
-## 🌐 การ Deploy ขึ้น GitHub Pages (ฟรี 100%)
+## 🌐 การ Deploy ขึ้น GitHub Pages
 
-โปรเจกต์นี้ตั้งค่า **GitHub Actions CI/CD** ไว้ใน [`.github/workflows/deploy.yml`](file:///.github/workflows/deploy.yml) ให้แล้ว สามารถขึ้นออนไลน์ได้ง่ายๆ ใน 2 ขั้นตอน:
+โปรเจกต์นี้ตั้งค่า **GitHub Actions CI/CD** ไว้ใน [`.github/workflows/deploy.yml`](file:///.github/workflows/deploy.yml) ให้เรียบร้อยแล้ว:
 
 1. **Push โค้ดขึ้น GitHub Repository** ของคุณ:
    ```bash
@@ -107,7 +150,7 @@ npm run build
 2. **เปิดการใช้งาน GitHub Pages บนหน้าเว็บ GitHub**:
    - ไปที่แท็บ **Settings** ของ Repository บน GitHub
    - เลื่อนแถบซ้ายเลือก **Pages**
-   - ในส่วน **Build and deployment > Source** ให้เปลี่ยนเป็น **`GitHub Actions`**
+   - ในส่วน **Build and deployment > Source** ให้เลือกเป็น **`GitHub Actions`**
 
 หลังจากนั้น GitHub Actions จะ Build และปล่อยเว็บขึ้นออนไลน์ที่ URL:
-`https://<username>.github.io/<repo-name>/` ให้อัตโนมัติทุกครั้งที่มีการ Push โค้ดครับ!
+👉 **[https://assajree.github.io/svvv-super-app/](https://assajree.github.io/svvv-super-app/)** ให้อัตโนมัติทุกครั้งที่มีการ Push โค้ดครับ!

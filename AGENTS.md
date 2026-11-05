@@ -13,6 +13,7 @@ Welcome to **svvv_web** (My WebApp Hub). This document provides context, convent
   - **Icons**: `lucide-react` (with centralized dynamic loader)
   - **E2E / Headless Testing**: Playwright (`@playwright/test` + Chromium)
   - **Platform**: Client-side static single-page app (Zero backend required)
+  - **Live URL**: https://assajree.github.io/svvv-super-app/
 
 ---
 

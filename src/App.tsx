@@ -1,14 +1,24 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { WEB_APPS } from './config/apps.config'
 import { useTheme } from './hooks/useTheme'
 import { LaunchpadHeader } from './components/LaunchpadHeader'
 import { LaunchpadGrid } from './components/LaunchpadGrid'
 import { LaunchpadFooter } from './components/LaunchpadFooter'
+import { PokemonTeamBuilderApp } from './apps/pokemon-team-builder/PokemonTeamBuilderApp'
 
 export function App() {
   const { theme, toggleTheme } = useTheme()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('ทั้งหมด')
+  const [currentHash, setCurrentHash] = useState(() => window.location.hash)
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash)
+    }
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
 
   // Extract unique categories
   const categories = useMemo(() => {
@@ -40,6 +50,17 @@ export function App() {
   const handleResetFilter = () => {
     setSearchQuery('')
     setSelectedCategory('ทั้งหมด')
+  }
+
+  // Routing for internal apps
+  if (currentHash === '#/pokemon-builder') {
+    return (
+      <PokemonTeamBuilderApp
+        onBackToHub={() => {
+          window.location.hash = ''
+        }}
+      />
+    )
   }
 
   return (
